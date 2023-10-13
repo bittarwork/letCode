@@ -35,7 +35,6 @@ class LinkedList:
             itr.next = Node(data, None)
 
     def Insert_New_Values(self, list_of_val):
-        self.head = None
         for item in list_of_val:
             self.Insert_at_end(item)
 
@@ -98,17 +97,32 @@ class LinkedList:
             counter += 1
             itr = itr.next
 
+    def Sort(self):
+        if self.head is None or self.head.next is None:
+            return
+
+        sorted = False
+        while not sorted:
+            sorted = True
+            itr = self.head
+            while itr.next:
+                if itr.data > itr.next.data:
+                    itr.data, itr.next.data = itr.next.data, itr.data
+                    sorted = False
+                itr = itr.next
+
+    def Insert_sorted(self, data):
+        if self.head is None or data <= self.head.data:
+            self.Insert_at_begining(data)
+            return
+
+        itr = self.head
+        while itr.next and data > itr.next.data:
+            itr = itr.next
+
+        node = Node(data, itr.next)
+        itr.next = node
+
 
 if __name__ == '__main__':
-    ll = LinkedList()
-    ll.Insert_at_begining(89)
-    ll.Insert_at_begining(22)
-    ll.Insert_at_begining(22)
-    ll.Insert_at_end(12)
-    ll.remove_at(2)
-    ll.Insert_At(2, "banana")
-    ll.remove_at(3)
-    ll.insert_after_value("banana", "fruit")
-    ll.remove_by_value("banana")
-    print(ll.Len_linked_list())
-    ll.Display()
+    pass
